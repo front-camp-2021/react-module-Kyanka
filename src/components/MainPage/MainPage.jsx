@@ -3,8 +3,8 @@ import icons from "../../icons/icons";
 import CardListContainer from "../CardList";
 import FilterListContainer from "../FilterList/FilterListContainer";
 import Search from "../Search/Search";
-const MainPage = (props) => {
-    console.log(props)
+import PaginationContainer from "../Pagination";
+const MainPage = () => {
 return (
     <div className={s.body}>
         <FilterListContainer/>
@@ -18,6 +18,7 @@ return (
             <CardListContainer/>
             </div>
         </div>
+        <PaginationContainer/>
 
     </div>)
 }

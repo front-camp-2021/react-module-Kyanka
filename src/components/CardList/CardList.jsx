@@ -13,7 +13,6 @@ const CardList = (props) => {
             addToFavorites={props.addToFavorites}
             addToBasket={props.addToBasket}
         />)
-    console.log(props.cards.length)
     if (props.cards.length === 0)
         return (<div>No data</div>)
     return (<main className={s.card_list}>{cards}</main>);
