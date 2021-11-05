@@ -41,8 +41,8 @@ export const getFilters = () => {
         Promise.all([getCategories(), getBrands()])
             .then(values => {
                 const filters = [
-                    {title: "Categories", items: values[0]},
-                    {title: "Brands", items: values[1]},
+                    {title: "category", items: values[0], isAnyActive:false},
+                    {title: "brand", items: values[1], isAnyActive:false},
                 ]
                 dispatch(AC.getFiltersAC(filters))
             });
@@ -61,7 +61,7 @@ export const clearFilters = () => {
 }
 
 let initState = {
-    filters: []
+    filters: [],
 };
 
 const filtersReducer = (state = initState, action) => {
@@ -79,9 +79,11 @@ export default filtersReducer;
 
 const changeFilterRed = (filters, title) => {
     return filters.map(filter =>{
-        return ({...filter, items: filter.items.map(item =>
-            item.title === title ? {...item, checked: !item.checked} : item
-            )})}
+        let res = {...filter, items: filter.items.map(item =>
+                item.title === title ? {...item, checked: !item.checked} : item)}
+        let active = res.items.filter(item => item.checked === true )
+        res.isAnyActive = active.length > 0
+        return (res)}
     )
 }
 const clearFiltersRed = (filters,) => {
