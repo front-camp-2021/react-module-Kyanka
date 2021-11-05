@@ -4,7 +4,7 @@ const FilterItem = (props) => {
     const {title, checked, changeFilter} = props;
     return (
         <p>
-            <input type="checkbox" onChange={event => changeFilter(event.target.id)} className={s.filter_item} id={title} checked={checked}/>
+            <input type="checkbox" onChange={event => changeFilter(event)} className={s.filter_item} id={title} checked={checked}/>
             {title}
         </p>)
 }

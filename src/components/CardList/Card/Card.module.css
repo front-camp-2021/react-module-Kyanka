@@ -19,6 +19,7 @@ figure{
 }
 
 .product {
+    max-height: 260rem;
     height: auto;
     max-width: 238rem;
     border-radius: 0;
