@@ -3,6 +3,7 @@ import axios from "axios";
 const GET_FILTERS = "GET_FILTERS";
 const CHANGE_FILTER = "CHANGE_FILTER";
 const CLEAR_FILTERS = "CLEAR_FILTERS";
+const CHANGE_SEARCH = "CHANGE_SEARCH";
 
 export const AC = {
     getFiltersAC(filters) {
@@ -13,6 +14,9 @@ export const AC = {
     },
     clearFilters() {
         return ({type: CLEAR_FILTERS})
+    },
+    changeSearch(search) {
+        return ({type:CHANGE_SEARCH, payload: search})
     }
 };
 
@@ -59,9 +63,15 @@ export const clearFilters = () => {
         dispatch(AC.clearFilters())
     }
 }
+export const changeSearch = (search) => {
+    return (dispatch) => {
+        dispatch(AC.changeSearch(search))
+    }
+}
 
 let initState = {
     filters: [],
+    search:''
 };
 
 const filtersReducer = (state = initState, action) => {
@@ -72,6 +82,9 @@ const filtersReducer = (state = initState, action) => {
             return ({...state, filters: changeFilterRed(state.filters, action.payload)});
         case CLEAR_FILTERS:
             return ({...state, filters: clearFiltersRed(state.filters)});
+        case CHANGE_SEARCH:
+            return ({...state, search: action.payload});
+
     }
     return state;
 };

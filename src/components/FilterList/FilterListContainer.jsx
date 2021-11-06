@@ -4,7 +4,7 @@ import {getFilters,changeFilter,clearFilters} from "../../redux/filtersReducer";
 import FilterList from "./FilterList";
 import {changePage} from "../../redux/pagesReducer";
 
-const FiltersListContainer = (props) => {
+const FiltersListContainer = () => {
     const dispatch = useDispatch();
     const filters = useSelector((state) => state.filtersRed.filters)
     useEffect(() => {
@@ -12,7 +12,6 @@ const FiltersListContainer = (props) => {
     }, []);
 
     const onFilterChange = (event) => {
-        //props.onSubmit(event)
         dispatch(changePage(1));
         dispatch(changeFilter(event.target.id));
     }
