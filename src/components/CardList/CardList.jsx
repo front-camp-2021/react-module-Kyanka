@@ -5,7 +5,7 @@ const CardList = (props) => {
         <Card
             id={card.id}
             imageSrc={card.images[0]}
-            rating={card.price}
+            rating={card.rating}
             price={card.price}
             brand={card.brand}
             category={card.category}

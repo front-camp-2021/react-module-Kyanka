@@ -1,5 +1,6 @@
 import s from './FilterList.module.css'
 import icons from "../../icons/icons";
+import Slider from "./Slider/Slider";
 const FilterItem = (props) => {
     const {title, checked, changeFilter} = props;
     return (
@@ -27,7 +28,7 @@ const FilterList = (props) => {
                 <span>Filters</span>
                 <button><img src={icons.arrows}/></button>
             </div>
-            <div className={s.slider}></div>
+            <Slider/>
             <div className={s.filter_cards}>
                 {filters.map(filter => filter === filters[filters.length-1]
                     ? <FilterCard changeFilter={changeFilter} title={filter.title} items={filter.items}/>

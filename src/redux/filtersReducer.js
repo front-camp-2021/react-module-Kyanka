@@ -4,9 +4,11 @@ const GET_FILTERS = "GET_FILTERS";
 const CHANGE_FILTER = "CHANGE_FILTER";
 const CLEAR_FILTERS = "CLEAR_FILTERS";
 const CHANGE_SEARCH = "CHANGE_SEARCH";
+const CHANGE_RANGE = "CHANGE_RANGE";
+const SET_RANGE = "SET_RANGE"
 
 export const AC = {
-    getFiltersAC(filters) {
+    getFilters(filters) {
         return ({type: GET_FILTERS, payload: filters})
     },
     changeFilter(title) {
@@ -17,7 +19,13 @@ export const AC = {
     },
     changeSearch(search) {
         return ({type:CHANGE_SEARCH, payload: search})
-    }
+    },
+    changeRange(range) {
+        return ({type:CHANGE_RANGE, payload: range})
+    },
+    setRange(rangeStart) {
+        return ({type:SET_RANGE, payload: rangeStart})
+    },
 };
 
 export const getFilters = () => {
@@ -48,7 +56,7 @@ export const getFilters = () => {
                     {title: "category", items: values[0], isAnyActive:false},
                     {title: "brand", items: values[1], isAnyActive:false},
                 ]
-                dispatch(AC.getFiltersAC(filters))
+                dispatch(AC.getFilters(filters))
             });
     }
 }
@@ -68,10 +76,23 @@ export const changeSearch = (search) => {
         dispatch(AC.changeSearch(search))
     }
 }
+export const changeRange = (range) => {
+    return (dispatch) => {
+        dispatch(AC.changeRange(range))
+    }
+}
+export const setRange = (range) => {
+    return (dispatch) => {
+        //console.log(range)
+        dispatch(AC.setRange(range))
+    }
+}
 
 let initState = {
     filters: [],
-    search:''
+    search:'',
+    rangeStart:{},
+    range:{}
 };
 
 const filtersReducer = (state = initState, action) => {
@@ -84,7 +105,10 @@ const filtersReducer = (state = initState, action) => {
             return ({...state, filters: clearFiltersRed(state.filters)});
         case CHANGE_SEARCH:
             return ({...state, search: action.payload});
-
+        case CHANGE_RANGE:
+            return ({...state, range: {...action.payload}});
+        case SET_RANGE:
+            return ({...state, rangeStart: {...action.payload}, range: {...action.payload}});
     }
     return state;
 };

@@ -1,6 +1,5 @@
 import Pagination from "./Pagination";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
 import {changePage} from "../../redux/pagesReducer";
 
 const PaginationContainer = () => {
@@ -14,9 +13,6 @@ const PaginationContainer = () => {
         id = id < start ? start : id;
         dispatch(changePage(id))
     }
-    useEffect(() => {
-
-    }, []);
     return <Pagination total={total} current={current} start={start} changePage={onChangePage}/>
 }
 export default PaginationContainer

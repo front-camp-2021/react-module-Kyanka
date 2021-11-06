@@ -3,14 +3,16 @@ import {useCallback, useEffect, useState} from "react";
 import {getProducts} from "../../redux/productsReducer";
 import {setTotalPages} from "../../redux/pagesReducer";
 import MainPage from "./MainPage";
-import {changeSearch} from "../../redux/filtersReducer";
+import {setRange} from "../../redux/filtersReducer";
 
 const MainPageContainer = () => {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.productsRed.products)
     const search = useSelector((state) => state.filtersRed.search)
-    let {currentPage, viewProducts, totalPages} = useSelector((state) => state.pagesRed)
-    const filters = useSelector((state) => state.filtersRed.filters)
+    let {currentPage, viewProducts} = useSelector((state) => state.pagesRed)
+    const {filters,range,rangeStart} = useSelector((state) => state.filtersRed)
+
+
     useEffect(() => {
         dispatch(getProducts());
     }, []);
@@ -31,22 +33,40 @@ const MainPageContainer = () => {
                 })
             }
         })
-        console.log(search)
+
         if(!!search){
             res = res.filter(prod => prod.title.toLowerCase().includes(search));
-
+        }
+        let max = 0;
+        res.forEach(product => {
+            max = product.price > max ? product.price : max;
+        })
+        let min = max;
+        res.forEach(product => {
+            min = product.price < min ? product.price : min;
+        })
+        if(range.max){
+            res = res.filter(prod => prod.price >= range.min && prod.price <= range.max);
         }
         const end = (viewProducts * currentPage);
         const start = end - viewProducts
-        return {filtered:res, viewed:res.slice(start, end)}
+        return {price:{max,min}, filtered:res, viewed:res.slice(start, end)}
     }
+    const [needSetRange,setNeedSetRange] = useState(true)
 
-    const memoizedCallback = useCallback(getFilterProducts, [filters, currentPage, products, search]);
+    const memoizedCallback = useCallback(getFilterProducts, [filters, currentPage, products, search, range]);
 
     useEffect(() => {
-        const filteredProducts = memoizedCallback().filtered;
-        dispatch(setTotalPages(Math.ceil(filteredProducts.length / viewProducts)));
-    }, [dispatch,currentPage,memoizedCallback, products, search]);
+        const {price,filtered} = memoizedCallback();
+
+        if(needSetRange){
+            if(rangeStart.max){
+                setNeedSetRange(false)
+            }
+            dispatch(setRange(price))
+        }
+        dispatch(setTotalPages(Math.ceil(filtered.length / viewProducts)));
+    }, [dispatch,currentPage,memoizedCallback, products, search,range,]);
 
     const {filtered, viewed} = getFilterProducts();
     return <MainPage totalLen={filtered.length} products={viewed}/>
