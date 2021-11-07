@@ -1,24 +1,27 @@
 import s from "./MainPage.module.css"
-import icons from "../../icons/icons";
-import CardListContainer from "../CardList";
-import FilterListContainer from "../FilterList/FilterListContainer";
-import SearchContainer from "../Search";
-import PaginationContainer from "../Pagination";
+import icons from "../../icons";
+import CardList from "../CardList";
+import FilterList from "../FilterList";
+import Search from "../Search";
+import Pagination from "../Pagination";
+import Header from "../Header";
+import {NavLink} from "react-router-dom";
 const MainPage = (props) => {
 return (
     <div className={s.body}>
-        <FilterListContainer />
+        <Header/>
+        <FilterList />
         <div className={s.results}>
             <div className={s.caption}>
                 <span>{props.totalLen} results found</span>
-                <button><img src={icons.wishlist}/></button>
+                <NavLink to="/wishList"><img src={icons.wishlist}/></NavLink>
             </div>
             <div className={s.under_caption}>
-            <SearchContainer onSubmit={props.onSubmit} setSearch={props.setSearch}/>
-            <CardListContainer products={props.products}/>
+            <Search onSubmit={props.onSubmit} setSearch={props.setSearch}/>
+            <CardList products={props.products}/>
             </div>
         </div>
-        <PaginationContainer/>
+        <Pagination/>
 
     </div>)
 }

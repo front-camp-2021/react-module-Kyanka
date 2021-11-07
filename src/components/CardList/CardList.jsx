@@ -14,7 +14,7 @@ const CardList = (props) => {
             addToBasket={props.addToBasket}
         />)
     if (props.cards.length === 0)
-        return (<div>No data</div>)
+        return (<div className={s.no_data}>No data</div>)
     return (<main className={s.card_list}>{cards}</main>);
 
 };

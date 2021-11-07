@@ -29,7 +29,6 @@ const initialState = {
 }
 
 const pagesReducer = (state = initialState, action) => {
-
     switch (action.type) {
         case SET_TOTAL_PAGES:
             return {...state, totalPages: action.payload};

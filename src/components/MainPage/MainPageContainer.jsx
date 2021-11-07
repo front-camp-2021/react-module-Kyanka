@@ -52,21 +52,23 @@ const MainPageContainer = () => {
         const start = end - viewProducts
         return {price:{max,min}, filtered:res, viewed:res.slice(start, end)}
     }
+
     const [needSetRange,setNeedSetRange] = useState(true)
-
-    const memoizedCallback = useCallback(getFilterProducts, [filters, currentPage, products, search, range]);
-
+    const setPriceRange = (price) => {
+        dispatch(setRange(price))
+    }
+    const memoFilteredProducts = useCallback(getFilterProducts, [filters, currentPage, products, search, range]);
+    //const memoPriceRange = useCallback(setPriceRange,[needSetRange])
     useEffect(() => {
-        const {price,filtered} = memoizedCallback();
-
+        const {price,filtered} = memoFilteredProducts();
         if(needSetRange){
             if(rangeStart.max){
                 setNeedSetRange(false)
             }
-            dispatch(setRange(price))
+            setPriceRange(price)
         }
         dispatch(setTotalPages(Math.ceil(filtered.length / viewProducts)));
-    }, [dispatch,currentPage,memoizedCallback, products, search,range,]);
+    }, [dispatch,currentPage,memoFilteredProducts, products, search,range]);
 
     const {filtered, viewed} = getFilterProducts();
     return <MainPage totalLen={filtered.length} products={viewed}/>

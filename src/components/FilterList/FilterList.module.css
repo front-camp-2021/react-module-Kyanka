@@ -47,11 +47,14 @@
     font-size: 18rem;
     font-weight: 600;
     text-transform: capitalize;
+
 }
 
 .filter_card div p {
     font-size: 16rem;
     font-weight: 300;
+    margin-top: 8rem;
+    margin-bottom: 8rem;
 }
 
 .filter_card div input {

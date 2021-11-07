@@ -125,7 +125,7 @@ const changeFilterRed = (filters, title) => {
 }
 const clearFiltersRed = (filters,) => {
     return filters.map(filter =>{
-        return ({...filter, items: filter.items.map(item =>
+        return ({...filter, isAnyActive:false, items: filter.items.map(item =>
                 item.checked ? {...item, checked: !item.checked} : item
             )})}
     )

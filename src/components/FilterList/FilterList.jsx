@@ -1,5 +1,5 @@
 import s from './FilterList.module.css'
-import icons from "../../icons/icons";
+import index from "../../icons";
 import Slider from "./Slider/Slider";
 const FilterItem = (props) => {
     const {title, checked, changeFilter} = props;
@@ -26,7 +26,7 @@ const FilterList = (props) => {
         <div className={s.filters}>
             <div className={s.caption}>
                 <span>Filters</span>
-                <button><img src={icons.arrows}/></button>
+                <button><img src={index.arrows}/></button>
             </div>
             <Slider/>
             <div className={s.filter_cards}>
