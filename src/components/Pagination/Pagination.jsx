@@ -11,7 +11,7 @@ const Pagination = (props) => {
     const {start, total, current, changePage} = props;
     const pages = []
     for (let i = start; i <= total; i++) {
-        pages.push(<Page current={current} value={i} changePage={changePage}/>)
+        pages.push(<Page key={i} current={current} value={i} changePage={changePage}/>)
     }
     if (total > 0)
         return <footer>

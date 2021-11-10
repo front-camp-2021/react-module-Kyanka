@@ -7,7 +7,7 @@ const Header = () => {
     const historyParts = history.split("/")
     const path = historyParts.map(item => {
         if (item.length > 0) {
-            return <><img src={icons.arrows}/> <a href={`/${item}`}>{item}</a></>
+            return <span key={item}><img src={icons.arrows}/> <a href={`/${item}`}>{item}</a></span>
         }
     })
     return (

@@ -2,9 +2,11 @@ import Card from "./Card/Card";
 import s from "./CardList.module.css"
 const CardList = (props) => {
     let cards = props.cards.map(card =>
+
         <Card
+            key={card.id}
             id={card.id}
-            imageSrc={card.images[0]}
+            images={card.images}
             rating={card.rating}
             price={card.price}
             brand={card.brand}

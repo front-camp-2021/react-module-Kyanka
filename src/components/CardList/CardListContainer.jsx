@@ -4,8 +4,8 @@ import {updateWishList} from "../../redux/productsReducer";
 
 const CardListContainer = (props) => {
     const dispatch = useDispatch();
-    const onWishListUpdate = (id) => {
-       dispatch(updateWishList(id))
+    const onWishListUpdate = (prod) => {
+       dispatch(updateWishList(prod))
     }
     return (<CardList addToFavorites={onWishListUpdate} cards={props.products}/>)
 }

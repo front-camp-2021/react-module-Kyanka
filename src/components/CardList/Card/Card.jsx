@@ -2,12 +2,12 @@ import s from './Card.module.css'
 //props = {id, imageSrc, rating, price, brand, category, title, addToFavorites, addToBasket}
 import index from '../../../icons'
 const Card = (props) => {
-    const {id, imageSrc, rating, price, brand, category, title, addToFavorites, addToBasket} = props;
+    const {id, images, rating, price, brand, category, title, addToFavorites, addToBasket} = props;
 
     return (
         <section className={s.card} id={id}>
         <figure>
-            <img className={s.product} src={imageSrc} alt="product image"/>
+            <img className={s.product} src={images[0]} alt="product image"/>
         </figure>
 
         <div className={s.rate_cost}>
@@ -27,7 +27,7 @@ const Card = (props) => {
         </article>
 
         <div className={s.action}>
-            <button className={s.wishlist} onClick={()=>addToFavorites(id)}><img className={s.icon} src={index.wishlist}/>wishlist</button>
+            <button className={s.wishlist} onClick={()=>addToFavorites({id, images, rating, price, brand, category, title})}><img className={s.icon} src={index.wishlist}/>wishlist</button>
             <button className={s.purchase} onClick={()=>addToBasket(id)}><img className={s.icon} src={index.basket}/>add to card</button>
         </div>
     </section>);

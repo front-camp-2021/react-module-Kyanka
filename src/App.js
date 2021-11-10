@@ -8,8 +8,8 @@ function App() {
   return (
       <div className="App">
           <Route path='/' render={() => <Redirect to="/mainPage"/>}/>
-          <Route path='/mainPage' render={() => <MainPage/>}/>
-          <Route path='/wishList' render={() => <WishList/>}/>
+          <Route path='/mainPage' component={MainPage}/>
+          <Route path='/wishList' component={WishList}/>
       </div>
   );
 }
